@@ -392,3 +392,48 @@ a:hover {
 	bottom: 0;
 	right: 0;
 }
+
+
+h3 {
+	font-size: 26px;
+	margin-top: 20%;
+}
+
+.modal-container {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	display: flex;
+	max-width: 1440px;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	width: 100%;
+	background-color: rgba(0, 0, 0, 0.30);
+
+
+}
+
+.modal-content {
+	background: white;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 50%;
+	height: 50%;
+	position: relative;
+	border-radius: 10px;
+
+}
+
+.fa-times {
+	cursor: pointer;
+	position: absolute;
+	top: 20px;
+	right: 30px;
+}
+
+.btn-modal {
+	margin-top: 30%;
+}
