@@ -411,8 +411,6 @@ h3 {
 	height: 100%;
 	width: 100%;
 	background-color: rgba(0, 0, 0, 0.30);
-
-
 }
 
 .modal-content {
@@ -424,7 +422,6 @@ h3 {
 	height: 50%;
 	position: relative;
 	border-radius: 10px;
-
 }
 
 .fa-times {
@@ -434,6 +431,18 @@ h3 {
 	right: 30px;
 }
 
+
+.line-modal {
+    width: 80%;
+    padding: 1px 0;
+    background-color: #B3B3B3;
+    border-top: 1px solid #ccc; 
+  display: flex;
+   margin-top:20%
+  
+}
+
+
 .btn-modal {
-	margin-top: 30%;
+	margin-top: 5%;
 }
