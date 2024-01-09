@@ -150,3 +150,7 @@ if (loged == "true") {
     });
 
 }
+
+admin.addEventListener("click", () => {
+    console.log("admin")
+})

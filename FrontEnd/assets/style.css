@@ -407,7 +407,6 @@ h3 {
 	left: 50%;
 	transform: translate(-50%, -50%);
 	display: flex;
-	max-width: 1440px;
 	justify-content: center;
 	align-items: center;
 	height: 100%;
@@ -437,6 +436,15 @@ h3 {
 	right: 30px;
 }
 
+.line-modal{
+	width:80%;
+	padding: 1px 0;
+	    background-color: #B3B3B3;
+    border-top: 1px solid #ccc; 
+  display: flex;
+   margin-top:20%;
+}
+
 .btn-modal {
-	margin-top: 30%;
+	margin-top: 5%;
 }
