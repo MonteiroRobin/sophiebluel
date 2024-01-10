@@ -32,7 +32,10 @@ form.addEventListener('submit', function (event) {
             if (data.userId && data.token) {
 
                 // Stocke l'information de connexion dans la session
-                window.sessionStorage.loged = true;
+                window.sessionStorage.sb = JSON.stringify({
+                    logged: true,
+                    token: data.token,
+                });
 
                 // Redirige vers la page d'accueil
                 window.location.href = './index.html';

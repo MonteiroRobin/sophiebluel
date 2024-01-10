@@ -136,21 +136,33 @@ document.querySelector('.all').addEventListener('click', function () {
 
 
 // Après connexion
-const loged = window.sessionStorage.loged;
+const sb = JSON.parse(window.sessionStorage.sb);
 const admin = document.querySelector("header nav .admin");
 const logout = document.querySelector("header nav .logout");
 const modalcontainer = document.querySelector(".modal-container");
 const times = document.querySelector(".modal-container .fa-times");
 const modalWorks = document.querySelector(".modal-works");
 
-if (loged == "true") {
+
+
+
+
+
+if (sb.logged === true) {
     admin.textContent = "Admin";
     logout.textContent = "logout";
+    console.log('hello');
     logout.addEventListener("click", () => {
-        window.sessionStorage.loged = false;
+        sb.logged = false;
+        sb.token = null;
+        window.sessionStorage.sb = JSON.stringify(sb);
     });
 
 }
+
+
+
+
 
 admin.addEventListener("click", () => {
     modalcontainer.style.display = "flex";
@@ -171,18 +183,64 @@ modalcontainer.addEventListener("click", (e) => {
 async function displayModal() {
     modalWorks.innerHTML = ""; // Nettoie le contenu de la modal
 
-    // Parcourt tous les works et les ajoute directement à modalWorks
     allWorks.forEach(work => {
         const workElement = document.createElement('div');
-        workElement.classList.add('work-item'); // Ajoute une classe pour styliser
+        workElement.classList.add('work-item');
+        workElement.dataset.id = work.id; // Ajoute l'ID du travail pour une utilisation dans la suppression
+
+        const deleteIcon = document.createElement('span');
+        deleteIcon.innerHTML = '<i class="fas fa-trash"></i>'; // Icône de poubelle
+        deleteIcon.classList.add('delete-icon');
+        // Ajoute un attribut de data-id pour reconnaître facilement quel travail supprimer
+        deleteIcon.dataset.id = work.id; 
+
+        workElement.appendChild(deleteIcon);
 
         const image = document.createElement('img');
         image.src = work.imageUrl;
-        image.classList.add('work-image'); // Classe pour l'image
+        image.classList.add('work-image');
+        workElement.appendChild(image);
 
-        workElement.appendChild(image); // Ajoute l'image à workElement
-        modalWorks.appendChild(workElement); // Ajoute workElement à modalWorks
+        modalWorks.appendChild(workElement);
     });
+
+    // Après avoir ajouté tous les éléments de travail, attachez les événements de suppression
+    deleteContent();
 }
 
+// Fonction pour attacher les événements de suppression aux icônes de poubelle
+function deleteContent() {
+    const deleteIcons = document.querySelectorAll(".modal-works .delete-icon");
+    deleteIcons.forEach((icon) => {
+      icon.addEventListener("click", async (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const workId = e.target.closest('.delete-icon').dataset.id;
+        // Vérifiez que le token existe avant de faire la requête
+        if (!sb.token) {
+          console.error("Token d'authentification non trouvé ou non connecté.");
+          return;
+        }
+        const init = {
+          method: "DELETE",
+          headers: {
+            Accept: '*/*',
+            Authorization: `Bearer ${sb.token}`, // Utiliser le token pour l'autorisation
+          },
+        };
+        fetch(`http://localhost:5678/api/works/${workId}`, init)
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error('Problème lors de la suppression');
+            }
+            return response.json();
+        })
+        .then((data) => {
+            console.log("Suppression réussie:", data);
+            // Vous pouvez également mettre à jour l'affichage ici si nécessaire
+        })
+        
+      });
+    });
+  }
 
