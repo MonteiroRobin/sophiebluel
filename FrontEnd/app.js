@@ -38,7 +38,7 @@ function filterWorks(category) {
     } else {
         // Boucle pour les travaux par id
         for (let work of allWorks) {
-            if (work.category.id === category) {
+            if (work.category.id.toString() === category) {
                 buildWork(work);
             }
         }
@@ -70,33 +70,31 @@ function buildCategory(category) {
     button.textContent = category.name
     button.classList.add('btn')
 
-
+    // Ajout de l'attribut data-id au bouton
+    button.setAttribute('data-id', category.id);
 
     //button est ajouter en tant qu'enfant de categories
     categories.appendChild(button)
 
 
-    //ecouteur d'évènement pour filtrés par l'id
-
+    // Écouteur d'événement pour filtrer par l'id
     button.addEventListener('click', function () {
 
-
-        //on récupère les éléments qui ont la class .btn
+        // Récupération des éléments qui ont la classe .btn
         const buttons = document.querySelectorAll('.btn');
 
-        //On boucle dessus pour itérer sur chaque éléments
+        // Boucle pour retirer la classe active de tous les boutons
         for (let btn of buttons) {
-            btn.classList.remove('active');//on retire la class active
+            btn.classList.remove('active');
         }
 
-        //ajout de la classe active sur les filtres
+        // Ajout de la classe active sur le bouton cliqué
         button.classList.add('active');
 
-        filterWorks(category.id);
+        // Récupération de l'id de catégorie à partir de l'attribut data-id
+        const categoryId = this.getAttribute('data-id');
 
-
-
-
+        filterWorks(categoryId);
     });
 
 }
@@ -141,6 +139,9 @@ document.querySelector('.all').addEventListener('click', function () {
 const loged = window.sessionStorage.loged;
 const admin = document.querySelector("header nav .admin");
 const logout = document.querySelector("header nav .logout");
+const modalcontainer = document.querySelector(".modal-container");
+const times = document.querySelector(".modal-container .fa-times");
+const modalWorks = document.querySelector(".modal-works");
 
 if (loged == "true") {
     admin.textContent = "Admin";
@@ -150,4 +151,38 @@ if (loged == "true") {
     });
 
 }
+
+admin.addEventListener("click", () => {
+    modalcontainer.style.display = "flex";
+    displayModal();
+});
+times.addEventListener("click", () => {
+    modalcontainer.style.display = "none";
+});
+
+
+modalcontainer.addEventListener("click", (e) => {
+    console.log(e.target.className);
+    if (e.target.className === "modal-container") {
+        modalcontainer.style.display = "none";
+    }
+});
+
+async function displayModal() {
+    modalWorks.innerHTML = ""; // Nettoie le contenu de la modal
+
+    // Parcourt tous les works et les ajoute directement à modalWorks
+    allWorks.forEach(work => {
+        const workElement = document.createElement('div');
+        workElement.classList.add('work-item'); // Ajoute une classe pour styliser
+
+        const image = document.createElement('img');
+        image.src = work.imageUrl;
+        image.classList.add('work-image'); // Classe pour l'image
+
+        workElement.appendChild(image); // Ajoute l'image à workElement
+        modalWorks.appendChild(workElement); // Ajoute workElement à modalWorks
+    });
+}
+
 

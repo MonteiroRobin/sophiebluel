@@ -400,12 +400,13 @@ h3 {
 }
 
 .modal-container {
+
+
 	position: fixed;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	display: flex;
-	max-width: 1440px;
+	display: none;
 	justify-content: center;
 	align-items: center;
 	height: 100%;
@@ -422,6 +423,12 @@ h3 {
 	height: 50%;
 	position: relative;
 	border-radius: 10px;
+	overflow: hidden;
+	/* Ajouté pour empêcher le débordement */
+}
+
+.modal-content h3 {
+	margin-top: 30px;
 }
 
 .fa-times {
@@ -431,18 +438,41 @@ h3 {
 	right: 30px;
 }
 
-
 .line-modal {
-    width: 80%;
-    padding: 1px 0;
-    background-color: #B3B3B3;
-    border-top: 1px solid #ccc; 
-  display: flex;
-   margin-top:20%
-  
+	width: 80%;
+	padding: 1px 0;
+	background-color: #B3B3B3;
+	border-top: 1px solid #ccc;
+	display: flex;
+	margin-top: 5%;
 }
 
+.modal-works {
+	height: 80%;
+	width: 80%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 10px;
+	overflow-y: auto;
+	max-height: 70%;
+	padding: 30px;
+}
 
 .btn-modal {
 	margin-top: 5%;
+}
+
+.work-item {
+	border: 2px solid #000000;
+	flex-basis: 22%;
+	overflow: hidden;
+	/* Ajouté pour empêcher le débordement du contenu */
+	margin: 10px;
+	/* Espacement autour des items */
+}
+
+.work-image {
+	max-width: 100%;
 }
