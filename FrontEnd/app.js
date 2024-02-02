@@ -137,11 +137,12 @@ document.querySelector('.all').addEventListener('click', function () {
 
 // Après connexion
 const sb = JSON.parse(window.sessionStorage.sb);
-const admin = document.querySelector("header nav .admin");
+const modify = document.querySelector(".modify-span");
 const logout = document.querySelector("header nav .logout");
 const modalcontainer = document.querySelector(".modal-container");
 const times = document.querySelector(".modal-container .fa-times");
 const modalWorks = document.querySelector(".modal-works");
+const filter = document.querySelector(".filter");
 
 
 
@@ -149,9 +150,10 @@ const modalWorks = document.querySelector(".modal-works");
 
 
 if (sb.logged === true) {
-    admin.textContent = "Admin";
+
     logout.textContent = "logout";
-    console.log('hello');
+    modify.style.display = "inline";
+    filter.style.display = "none";
     logout.addEventListener("click", () => {
         sb.logged = false;
         sb.token = null;
@@ -164,7 +166,7 @@ if (sb.logged === true) {
 
 
 
-admin.addEventListener("click", () => {
+modify.addEventListener("click", () => {
     modalcontainer.style.display = "flex";
     displayModal();
 });
@@ -192,7 +194,7 @@ async function displayModal() {
         deleteIcon.innerHTML = '<i class="fas fa-trash"></i>'; // Icône de poubelle
         deleteIcon.classList.add('delete-icon');
         // Ajoute un attribut de data-id pour reconnaître facilement quel travail supprimer
-        deleteIcon.dataset.id = work.id; 
+        deleteIcon.dataset.id = work.id;
 
         workElement.appendChild(deleteIcon);
 
@@ -212,35 +214,35 @@ async function displayModal() {
 function deleteContent() {
     const deleteIcons = document.querySelectorAll(".modal-works .delete-icon");
     deleteIcons.forEach((icon) => {
-      icon.addEventListener("click", async (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        const workId = e.target.closest('.delete-icon').dataset.id;
-        // Vérifiez que le token existe avant de faire la requête
-        if (!sb.token) {
-          console.error("Token d'authentification non trouvé ou non connecté.");
-          return;
-        }
-        const init = {
-          method: "DELETE",
-          headers: {
-            Accept: '*/*',
-            Authorization: `Bearer ${sb.token}`, // Utiliser le token pour l'autorisation
-          },
-        };
-        fetch(`http://localhost:5678/api/works/${workId}`, init)
-        .then((response) => {
-            if (!response.ok) {
-                throw new Error('Problème lors de la suppression');
+        icon.addEventListener("click", async (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const workId = e.target.closest('.delete-icon').dataset.id;
+            // Vérifiez que le token existe avant de faire la requête
+            if (!sb.token) {
+                console.error("Token d'authentification non trouvé ou non connecté.");
+                return;
             }
-            return response.json();
-        })
-        .then((data) => {
-            console.log("Suppression réussie:", data);
-            // Vous pouvez également mettre à jour l'affichage ici si nécessaire
-        })
-        
-      });
+            const init = {
+                method: "DELETE",
+                headers: {
+                    Accept: '*/*',
+                    Authorization: `Bearer ${sb.token}`, // Utiliser le token pour l'autorisation
+                },
+            };
+            fetch(`http://localhost:5678/api/works/${workId}`, init)
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error('Problème lors de la suppression');
+                    }
+                    return response.json();
+                })
+                .then((data) => {
+                    console.log("Suppression réussie:", data);
+                    // Vous pouvez également mettre à jour l'affichage ici si nécessaire
+                })
+
+        });
     });
-  }
+}
 
