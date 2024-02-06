@@ -135,21 +135,21 @@ document.querySelector('.all').addEventListener('click', function () {
 
 
 
+
 // Après connexion
 const sb = JSON.parse(window.sessionStorage.sb);
 const modify = document.querySelector(".modify-span");
 const logout = document.querySelector("header nav .logout");
-const modalcontainer = document.querySelector(".modal-container");
-const times = document.querySelector(".modal-container .fa-times");
-const modalWorks = document.querySelector(".modal-works");
 const filter = document.querySelector(".filter");
 
 
-
-
+const modalcontainer = document.querySelector(".modal-container");
+const times = document.querySelector(".modal-container .fa-times");
+const modalWorks = document.querySelector(".modal-works");
 
 
 if (sb.logged === true) {
+
 
     logout.textContent = "logout";
     modify.style.display = "inline";
@@ -168,8 +168,10 @@ if (sb.logged === true) {
 
 modify.addEventListener("click", () => {
     modalcontainer.style.display = "flex";
-    displayModal();
+    displayWorksInModal();
+    deleteContent();
 });
+
 times.addEventListener("click", () => {
     modalcontainer.style.display = "none";
 });
@@ -182,7 +184,7 @@ modalcontainer.addEventListener("click", (e) => {
     }
 });
 
-async function displayModal() {
+async function displayWorksInModal() {
     modalWorks.innerHTML = ""; // Nettoie le contenu de la modal
 
     allWorks.forEach(work => {
@@ -191,7 +193,7 @@ async function displayModal() {
         workElement.dataset.id = work.id; // Ajoute l'ID du travail pour une utilisation dans la suppression
 
         const deleteIcon = document.createElement('span');
-        deleteIcon.innerHTML = '<i class="fas fa-trash"></i>'; // Icône de poubelle
+        deleteIcon.createElement = '<i class="fas fa-trash"></i>'; // Icône de poubelle
         deleteIcon.classList.add('delete-icon');
         // Ajoute un attribut de data-id pour reconnaître facilement quel travail supprimer
         deleteIcon.dataset.id = work.id;
@@ -206,8 +208,7 @@ async function displayModal() {
         modalWorks.appendChild(workElement);
     });
 
-    // Après avoir ajouté tous les éléments de travail, attachez les événements de suppression
-    deleteContent();
+
 }
 
 // Fonction pour attacher les événements de suppression aux icônes de poubelle
