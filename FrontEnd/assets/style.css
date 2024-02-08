@@ -177,9 +177,6 @@ h2 {
 	color: #1D6154
 }
 
-header {
-	margin-top: 80px;
-}
 
 nav ul {
 	display: flex;
@@ -526,7 +523,6 @@ h3 {
 	height: 45px;
 	width: 100%;
 	background: #000;
-	display: flex;
 	justify-content: center;
 	align-items: center;
 

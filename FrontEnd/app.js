@@ -141,8 +141,7 @@ const sb = JSON.parse(window.sessionStorage.sb);
 const modify = document.querySelector(".modify-span");
 const logout = document.querySelector("header nav .logout");
 const filter = document.querySelector(".filter");
-
-
+const edition = document.querySelector(".display-none");
 const modalcontainer = document.querySelector(".modal-container");
 const times = document.querySelector(".modal-container .fa-times");
 const modalWorks = document.querySelector(".modal-works");
@@ -150,7 +149,7 @@ const modalWorks = document.querySelector(".modal-works");
 
 if (sb.logged === true) {
 
-
+    edition.style.display = "flex"
     logout.textContent = "logout";
     modify.style.display = "inline";
     filter.style.display = "none";
