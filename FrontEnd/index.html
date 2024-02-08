@@ -88,10 +88,55 @@
 			<div class="modal-works"></div>
 
 			<div class="line-modal"></div>
-			<button class="btn btn-modal">Ajouter un projet</button>
+			<button class="btn btn-modal" id="add-project-btn">Ajouter un projet</button>
+
+
+		</div>
+		<div class="post-modal">
+			<span><i class="fas fa-times"></i></span>
+			<i class="fa-solid fa-arrow-left"></i>
+
+			<form class="">
+				<div class="">
+					<img class="" src="./assets/icons/image-regular.svg" alt="chosen-picture" />
+
+					<button id="btn-label">
+						<label for="image-postform" class="">
+							+ Ajouter Photo
+						</label>
+						<input type="file" value="Ajouter photo" name="image-postform" id="image-postform"
+							class="display-none" required />
+					</button>
+
+					<p>jpg, png : 4mo max</p>
+				</div>
+
+				<label for="">Titre</label>
+				<input type="text" name="title-postform" id="title-postform" maxlength="50" required />
+
+				<label for="">Catégorie</label>
+
+				<div class="">
+					<select name="category" id="category-postform"></select>
+					<div class="icon-select-arrow">
+						<img src="./assets/icons/arrow-down.svg" alt="" />
+					</div>
+				</div>
+
+				<hr />
+
+				<h2 class=""></h2>
+				<input type="submit" value="Valider" class="btn-valide-postform btn-unvalide" maxlength="50" />
+			</form>
 
 		</div>
 	</div>
+
+
+
+
+
+
 
 
 	<script src="app.js"></script>

@@ -527,3 +527,136 @@ h3 {
 	align-items: center;
 
 }
+
+.post-modal-container {
+	background-color: white;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	display: none;
+	justify-content: center;
+	align-items: center;
+	background-color: rgba(0, 0, 0, 0.30);
+}
+
+.post-modal {
+	background: white;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 633px;
+	height: auto;
+	/* Ajusté pour permettre au contenu de définir la hauteur */
+	position: relative;
+	border-radius: 10px;
+	overflow: hidden;
+	margin: 20px auto;
+	padding: 20px;
+	/* Ajouté pour l'espacement intérieur */
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	/* Optionnel: Ajoute une ombre pour un effet en relief */
+}
+
+.post-modal form {
+	width: 100%;
+	/* Utilise toute la largeur disponible */
+}
+
+.post-modal div,
+/* Div conteneur de l'image et du bouton */
+.post-modal select,
+.post-modal input[type="text"],
+.post-modal input[type="submit"] {
+	width: 90%;
+	/* Légèrement moins que la largeur totale pour l'espacement */
+	margin: 10px auto;
+	/* Centré avec un peu d'espace au-dessus et en dessous */
+	padding: 8px;
+	/* Pour l'espacement interne */
+	border: 1px solid #ccc;
+	/* Bordure subtile */
+	border-radius: 5px;
+	/* Bords arrondis pour l'esthétique */
+}
+
+.post-modal label {
+	display: block;
+	/* Assure que le label est sur sa propre ligne */
+	margin: 20px auto 10px;
+	/* Espace au-dessus du label */
+	width: 90%;
+	/* Correspond à la largeur des éléments de formulaire */
+}
+
+/* Styles spécifiques pour le bouton d'ajout de photo */
+.post-modal #btn-label {
+	background-color: #f0f0f0;
+	/* Fond légèrement gris */
+	border: none;
+	/* Pas de bordure */
+	cursor: pointer;
+	/* Indique la possibilité de cliquer */
+	padding: 8px;
+	/* Espacement interne */
+	border-radius: 5px;
+	/* Bords arrondis */
+}
+
+.post-modal .icon-select-arrow {
+	position: absolute;
+	right: 30px;
+	/* Positionne l'icône vers la droite du select */
+	pointer-events: none;
+	/* Empêche l'icône d'intercepter les clics */
+}
+
+.post-modal .fa-arrow-left,
+.post-modal .fas.fa-times {
+	cursor: pointer;
+	position: absolute;
+	top: 10px;
+}
+
+.post-modal .fas.fa-times {
+	right: 10px;
+	/* Positionne l'icône de fermeture en haut à droite */
+}
+
+/* Style pour le bouton de validation désactivé */
+.post-modal .btn-unvalide {
+	background-color: #a7a7a7;
+	color: #fff;
+	cursor: not-allowed;
+}
+
+/* Style pour le bouton de validation actif */
+.post-modal .btn-valide-postform:not(.btn-unvalide) {
+	background-color: #4CAF50;
+	color: #fff;
+	cursor: pointer;
+}
+
+.post-modal {
+	background: white;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 633px;
+	height: 650px;
+	position: relative;
+	border-radius: 10px;
+	overflow: hidden;
+	margin: 0 auto;
+}
+
+.post-modal .fa-arrow-left {
+	position: absolute;
+	left: 10px;
+	top: 10px;
+	/* Place la flèche à l'extrême gauche du conteneur .post-modal */
+	padding: 10px;
+	font-size: large;
+
+	/* Ajoute un peu d'espace autour de l'icône pour faciliter le clic/touch */
+}
