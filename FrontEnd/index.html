@@ -92,16 +92,16 @@
 
 
 		</div>
-		<div class="post-modal">
+		<div class="post-modal display-none">
+			<h3>Ajout photo</h3>
 			<span><i class="fas fa-times"></i></span>
 			<i class="fa-solid fa-arrow-left"></i>
-
-			<form class="">
-				<div class="">
-					<img class="" src="./assets/icons/image-regular.svg" alt="chosen-picture" />
+			<form class="form-add-project">
+				<div class="div-add-a-picture">
+					<img class="image-from-input" src="./assets/icons/image-regular.svg" alt="chosen-picture" />
 
 					<button id="btn-label">
-						<label for="image-postform" class="">
+						<label for="image-postform" class="label-in-button">
 							+ Ajouter Photo
 						</label>
 						<input type="file" value="Ajouter photo" name="image-postform" id="image-postform"
@@ -111,12 +111,12 @@
 					<p>jpg, png : 4mo max</p>
 				</div>
 
-				<label for="">Titre</label>
+				<label for="title-postform">Titre</label>
 				<input type="text" name="title-postform" id="title-postform" maxlength="50" required />
 
-				<label for="">Catégorie</label>
+				<label for="category-postform">Catégorie</label>
 
-				<div class="">
+				<div class="div-select">
 					<select name="category" id="category-postform"></select>
 					<div class="icon-select-arrow">
 						<img src="./assets/icons/arrow-down.svg" alt="" />
@@ -125,8 +125,8 @@
 
 				<hr />
 
-				<h2 class=""></h2>
-				<input type="submit" value="Valider" class="btn-valide-postform btn-unvalide" maxlength="50" />
+				<h2 class="response-post-request"></h2>
+				<input type="submit" value="Valider" class="btn btn-modal" maxlength="50" />
 			</form>
 
 		</div>

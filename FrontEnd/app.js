@@ -217,6 +217,7 @@ function deleteContent() {
         icon.addEventListener("click", async (e) => {
             e.preventDefault();
             e.stopPropagation();
+            const deleteIcon = document.createElement('i');
             const workId = e.target.closest('.delete-icon').dataset.id;
             // Vérifiez que le token existe avant de faire la requête
             if (!sb.token) {
@@ -247,3 +248,93 @@ function deleteContent() {
 }
 
 
+
+
+
+// METHODE POUR POST
+const postModal = document.querySelector('.post-modal');
+const btnAddProject = document.getElementById('add-project-btn');
+const modalRemoveWorks = document.querySelector('.modal-content');
+const returnArrow = document.querySelector('.fa-arrow-left');
+const formAddProject = document.querySelector('.form-add-project');
+const imgDataForm = document.querySelector('#image-postform');
+const imgToDisplay = document.querySelector('.image-from-input');
+const titleDataForm = document.querySelector('#title-postform');
+const categoryDataForm = document.querySelector('#category-postform');
+const responsePostRequest = document.querySelector('.response-post-request');
+const btnValidePostform = document.querySelector('input[type="submit"]');
+
+// afficher et retirer modal
+btnAddProject.addEventListener("click", function () {
+    postModal.style.display = "block";
+    modalRemoveWorks.classList.add("display-none");
+});
+
+returnArrow.addEventListener("click", function () {
+    modalRemoveWorks.classList.remove("display-none");
+    postModal.style.display = "none";
+});
+
+// Prévisualisation de l'image sélectionnée
+imgDataForm.addEventListener('change', function () {
+    if (this.files && this.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            imgToDisplay.src = e.target.result;
+            imgToDisplay.classList.remove('display-none'); // Assurez-vous que cette classe permet d'afficher l'image
+        }
+        reader.readAsDataURL(this.files[0]);
+    }
+});
+
+
+(async function () {
+    const response = await fetch('http://localhost:5678/api/categories');
+    const categories = await response.json();
+
+    // Sélectionnez le menu déroulant des catégories dans le formulaire
+    const categorySelect = document.querySelector('#category-postform');
+
+    // Ajoutez chaque catégorie comme option dans le menu déroulant
+    categories.forEach(category => {
+        const option = document.createElement('option');
+        option.value = category.id; // Utilisez l'ID de la catégorie comme valeur
+        option.textContent = category.name; // Le nom de la catégorie comme texte visible
+        categorySelect.appendChild(option);
+    });
+})();
+
+// Soumission du formulaire
+formAddProject.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    //  FormData pour l'envoi
+    var formData = new FormData();
+    formData.append('image', imgDataForm.files[0]);
+    formData.append('title', titleDataForm.value);
+    formData.append('category', categoryDataForm.value);
+
+    // Appel API pour envoyer les données
+    fetch('http://localhost:5678/api/works', {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'Authorization': `Bearer ${sb.token}`,
+        },
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data); // Traiter la réponse de l'API
+            responsePostRequest.textContent = 'Projet ajouté avec succès';
+
+            // Réinitialiser le formulaire et fermer la modal
+
+            imgToDisplay.src = './assets/icons/image-regular.svg'; // Remettre l'image par défaut
+            postModal.style.display = "none";
+            modalRemoveWorks.classList.remove("display-none");
+        })
+        .catch(error => {
+            console.error('Erreur lors de l\'envoi du formulaire:', error);
+            responsePostRequest.textContent = 'Erreur lors de l\'ajout du projet';
+        });
+});

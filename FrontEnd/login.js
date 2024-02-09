@@ -11,6 +11,15 @@ form.addEventListener('submit', function (event) {
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
 
+
+
+    // Vérifie si l'email ou le mot de passe est vide
+    if (!email || !password) {
+        // Affiche un message d'erreur et sort de la fonction
+        alert('L\'email et le mot de passe ne doivent pas être vides.');
+        return; // Arrête l'exécution de la fonction ici
+    }
+
     // Requête POST à l'API
     fetch('http://localhost:5678/api/users/login', {
         method: 'POST',
